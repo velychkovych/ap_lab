@@ -9,10 +9,21 @@ from flask import request, jsonify
 def db_lifecycle(func):
     def wrapper():
         with Session() as s:
-            rez = func(session=s)
-            s.commit()
-            return rez
-
+            try:
+                rez = func(session=s)
+                s.commit()
+                return rez
+            except Exception as e:
+                if isinstance(e, ValueError):
+                    return jsonify({'message': e.args[0], 'type': 'ValueError'}), 400
+                elif isinstance(e, AttributeError):
+                    return jsonify({'message': e.args[0], 'type': 'AttributeError'}), 400
+                elif isinstance(e, KeyError):
+                    return jsonify({'message': e.args[0], 'type': 'KeyError'}), 400
+                elif isinstance(e, TypeError):
+                    return jsonify({'message': e.args[0], 'type': 'TypeError'}), 400
+                else:
+                    return jsonify({'message': str(e), 'type': 'InternalServerError'}), 500
     return wrapper
 
 
