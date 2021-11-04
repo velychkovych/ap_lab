@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import Column, Integer, ForeignKey, VARCHAR, DateTime
 
-engine = create_engine('mysql+pymysql://root:00000000password@localhost:3306/swagger_service')
+engine = create_engine('mysql+pymysql://root:pass@localhost:3306/db')
 engine.connect()
 
 SessionFactory = sessionmaker(bind=engine)
