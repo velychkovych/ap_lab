@@ -1,4 +1,4 @@
-from lab_6 import Session, user, userStatus, article, modification
+from models import Session, user, userStatus, article, modification
 from datetime import datetime
 
 userstatus1 = userStatus(status='superuser')
@@ -19,5 +19,5 @@ with Session() as session:
     session.commit()
     session.add(modification1)
     session.commit()
-    
+
 print(session.query(user).all()[0])
