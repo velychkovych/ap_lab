@@ -51,7 +51,7 @@ def get_users():
 
 
 @app.route("/user/<string:username>")
-def get_user_by_Id(username):
+def get_entry_by_username(username):
     user_obj = dbUtils.get_entry_by_username(user, username)
     return jsonify(UserSchema().dump(user_obj))
 
