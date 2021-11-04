@@ -5,3 +5,4 @@ from models import user
 class UserSchema(Schema):
     idUser = fields.Integer()
     firstname = fields.String()
+    username = fields.String()

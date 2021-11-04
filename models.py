@@ -11,6 +11,7 @@ SessionFactory = sessionmaker(bind=engine)
 Session = scoped_session(SessionFactory)
 
 BaseModel = declarative_base()
+BaseModel.query = Session.query_property()
 
 
 class userStatus(BaseModel):
@@ -24,7 +25,7 @@ class user(BaseModel):
     __tablename__ = "user"
 
     idUser = Column(Integer, primary_key=True)
-    username = Column(VARCHAR(45))
+    username = Column(VARCHAR(45), unique=True)
     firstname = Column(VARCHAR(45))
     lastname = Column(VARCHAR(45))
     email = Column(VARCHAR(45))
