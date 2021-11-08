@@ -9,7 +9,6 @@ article1 = article(date=datetime.now(), header='article1',
 modification1 = modification(
     dateOfModification=datetime.now(), idUser=1, idArticle=1)
 
-
 with Session() as session:
     session.add(user1)
     session.commit()
