@@ -27,7 +27,6 @@ def db_lifecycle(func):
     return wrapper
 
 
-
 @app.route("/user/signup", methods=["POST"])
 @db_lifecycle
 def create_user(session):
@@ -51,9 +50,16 @@ def get_users():
 
 
 @app.route("/user/<string:username>")
-def get_entry_by_username(username):
+def get_user_by_username(username):
     user_obj = dbUtils.get_entry_by_username(user, username)
     return jsonify(UserSchema().dump(user_obj))
+
+
+# @app.route("/user/<string:username>")
+# @db_lifecycle
+# def delete_user_by_name(ss,username):
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True)

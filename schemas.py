@@ -1,6 +1,4 @@
-from marshmallow import post_load, Schema, fields
-from models import user
-
+from marshmallow import Schema, fields
 
 class UserSchema(Schema):
     idUser = fields.Integer()
