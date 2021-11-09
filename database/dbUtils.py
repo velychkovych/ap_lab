@@ -58,12 +58,20 @@ def get_entries(schema, model):
     users = model.query.all()
     return jsonify(schema(many=True).dump(users))
 
+
 @db_lifecycle
-def del_entry_by_id(schema,model,id):
-    user = query(model).filter_by(id=id).first()
-    
+def get_entry_by_id(schema, model, id):
+    user = session.query(model).get(id)
+    return jsonify(schema().dump(user))
+
+
+@db_lifecycle
+@session_lifecycle
+def del_entry_by_id(schema, model, id):
+    user = session.query(model).get(id)
+
     if user is None:
-        raise TypeError("Object not found")
-    
+        raise TypeError()
+
     session.delete(user)
-    return jsonify(schema().dump(model))
+    return jsonify(schema().dump(user))

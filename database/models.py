@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import Column, Integer, ForeignKey, VARCHAR, DateTime
+import datetime
 
 engine = create_engine('mysql+pymysql://root:pass@localhost:3306/db')
 engine.connect()
@@ -30,7 +31,7 @@ class user(BaseModel):
     lastname = Column(VARCHAR(45))
     email = Column(VARCHAR(45))
     password = Column(VARCHAR(45))
-    dateOfRegistration = Column(DateTime)
+    dateOfRegistration = Column(DateTime, default=datetime.datetime.utcnow())
     idUserStatus = Column(Integer, ForeignKey(userStatus.idUserStatus))
 
     # def __init__(self, firstname):
@@ -46,7 +47,7 @@ class article(BaseModel):
     __tablename__ = "article"
 
     idArticle = Column(Integer, primary_key=True)
-    date = Column(DateTime)
+    date = Column(DateTime, default=datetime.datetime.utcnow())
     header = Column(VARCHAR(45))
     textOfArticle = Column(VARCHAR(2000))
     idAuthor = Column(Integer, ForeignKey(user.idUser))
@@ -56,6 +57,6 @@ class modification(BaseModel):
     __tablename__ = "modification"
 
     idModification = Column(Integer, primary_key=True)
-    dateOfModification = Column(DateTime)
+    dateOfModification = Column(DateTime, default=datetime.datetime.utcnow())
     idUser = Column(Integer, ForeignKey(user.idUser))
     idArticle = Column(Integer, ForeignKey(article.idArticle))

@@ -10,6 +10,11 @@ def get_users():
     return get_entries(UserSchema, user)
 
 
-@app.route('/user', methods=["DELETE"])
-def del_user(id):
-    return del_entry_by_id(schema, model, id)
+@app.route('/user', methods=["POST"])
+def set_user():
+    return create_entry(UserSchema, user)
+
+
+# @app.route('/user/<int:id>', methods=["DELETE"])
+# def del_user(id):
+#     return del_entry_by_id(UserSchema, user, id)

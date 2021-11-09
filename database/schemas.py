@@ -8,7 +8,8 @@ class UserSchema(Schema):
     lastname = fields.String()
     email = fields.String()
     password = fields.String()
-    dateOfRegistration = fields.Date()
+    dateOfRegistration = fields.DateTime()
+    idUserStatus = fields.Integer()
 
 
 class ArticleSchema(Schema):
@@ -21,6 +22,6 @@ class ArticleSchema(Schema):
 
 class ModificationSchema(Schema):
     idModification = fields.Integer()
-    dateOfModification = fields.Date()
+    dateOfModification = fields.DateTime()
     idUser = fields.Integer()
     idArticle = fields.Integer()

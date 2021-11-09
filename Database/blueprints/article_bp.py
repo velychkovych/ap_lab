@@ -12,5 +12,12 @@ def create_article():
 def get_articles():
     return get_entries(ArticleSchema, article)
 
-#get article by id
-#delete article
+
+@app.route("/article/<int:id>", methods=["GET"])
+def get_article_by_id(id):
+    return get_entry_by_id(ArticleSchema, article, id)
+
+
+@app.route('/article/<int:id>', methods=["DELETE"])
+def del_article(id):
+    return del_entry_by_id(ArticleSchema, article, id)
