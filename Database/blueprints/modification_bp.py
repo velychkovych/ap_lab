@@ -8,7 +8,6 @@ from database.schemas import ModificationSchema
 def create_modification():
     return create_entry(ModificationSchema, modification)
 
-
 # get all modification
 @app.route("/article/modification", methods=["GET"])
 def get_all_modification():
