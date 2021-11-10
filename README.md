@@ -30,4 +30,4 @@ alembic downgrade -1
 >
 > curl -X POST -H "Content-Type:application/json" --data-binary "{\"firstname\": \"Max\", \"password\": \"ax\"}" http://localhost:5000/user
 > curl -X POST -H "Content-Type:application/json" --data-binary "{\"header\":\"ads\",\"textOfArticle\":\"aboba\",\"idAuthor\":\"1\"}" http://localhost:5000/article
-> curl -X POST -H "Content-Type:application/json" --data-binary "{\"idUser\":\"1\",\"idArticle\:\"\"}" http://localhost:5000/article/modification
+> curl -X POST -H "Content-Type:application/json" --data-binary "{\"idUser\":\"1\",\"idArticle\":\"4\"}" http://localhost:5000/article/modification

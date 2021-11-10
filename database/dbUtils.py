@@ -55,23 +55,38 @@ def create_entry(schema, model):
 
 @db_lifecycle
 def get_entries(schema, model):
-    users = model.query.all()
-    return jsonify(schema(many=True).dump(users))
+    entries = model.query.all()
+    return jsonify(schema(many=True).dump(entries))
 
 
 @db_lifecycle
 def get_entry_by_id(schema, model, id):
-    user = session.query(model).get(id)
-    return jsonify(schema().dump(user))
+    entry = session.query(model).get(id)
+    return jsonify(schema().dump(entry))
 
 
 @db_lifecycle
 @session_lifecycle
 def del_entry_by_id(schema, model, id):
-    user = session.query(model).get(id)
+    entry = session.query(model).get(id)
 
-    if user is None:
+    if entry is None:
         raise TypeError()
 
-    session.delete(user)
-    return jsonify(schema().dump(user))
+    session.delete(entry)
+    return jsonify(schema().dump(entry))
+
+
+@db_lifecycle
+@session_lifecycle
+def update_entry(schema, model, id):
+    data = schema().load(request.get_json())
+    entry = session.query(model).get(id)
+
+    if entry is None:
+        raise TypeError()
+
+    for key, value in data.items():
+        setattr(entry, key, value)
+
+    return jsonify(schema().dump(entry))
