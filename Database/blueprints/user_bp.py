@@ -46,7 +46,7 @@ def del_user_by_username(username):
     entry = session.query(user).filter_by(username=username).first()
 
     if entry is None:
-        raise TypeError()
+        raise InvalidUsage("Object not found", status_code=404)
 
     session.delete(entry)
     return jsonify(UserSchema().dump(entry))

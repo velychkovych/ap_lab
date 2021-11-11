@@ -26,7 +26,7 @@ def update_article_by_id(id):
     entry = session.query(article).get(id)
 
     if entry is None:
-        raise TypeError()
+        raise InvalidUsage("Object not found", status_code=404)
 
     mod = modification(entry.idAuthor, entry.idArticle)
     session.add(mod)
