@@ -21,6 +21,9 @@ class userStatus(BaseModel):
     idUserStatus = Column(Integer, primary_key=True)
     status = Column(VARCHAR(45))
 
+    def __init__(self, status):
+        self.status = status
+
 
 class user(BaseModel):
     __tablename__ = "user"
@@ -29,13 +32,10 @@ class user(BaseModel):
     username = Column(VARCHAR(45), unique=True)
     firstname = Column(VARCHAR(45))
     lastname = Column(VARCHAR(45))
-    email = Column(VARCHAR(45))
+    email = Column(VARCHAR(45), unique=True)
     password = Column(VARCHAR(45))
     dateOfRegistration = Column(DateTime, default=datetime.datetime.utcnow())
     idUserStatus = Column(Integer, ForeignKey(userStatus.idUserStatus))
-
-    # def __init__(self, firstname):
-    #     self.firstname = firstname
 
     def str(self):
         return f"User ID    : {self.id}\n" \
@@ -50,7 +50,13 @@ class article(BaseModel):
     date = Column(DateTime, default=datetime.datetime.utcnow())
     header = Column(VARCHAR(45))
     textOfArticle = Column(VARCHAR(2000))
-    idAuthor = Column(Integer, ForeignKey(user.idUser))
+    idAuthor = Column(Integer, ForeignKey(user.idUser, ondelete='CASCADE'))
+
+    def __init__(self, date, header, textOfArticle, idAuthor):
+        self.date = date
+        self.header = header
+        self.textOfArticle = textOfArticle
+        self.idAuthor = idAuthor
 
 
 class modification(BaseModel):
@@ -58,5 +64,9 @@ class modification(BaseModel):
 
     idModification = Column(Integer, primary_key=True)
     dateOfModification = Column(DateTime, default=datetime.datetime.utcnow())
-    idUser = Column(Integer, ForeignKey(user.idUser))
+    idUser = Column(Integer, ForeignKey(user.idUser,ondelete='CASCADE'))
     idArticle = Column(Integer, ForeignKey(article.idArticle))
+
+    def __init__(self, idUser, idArticle):
+        self.idUser = idUser
+        self.idArticle = idArticle
