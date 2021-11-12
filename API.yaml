@@ -204,26 +204,20 @@ paths:
             - admin:user
             - regular:user
           
-  /article/{articleid}:
+  /article/:
     post:
       tags:
-      - article
-      summary: Create a modification.
-      description: It can be done only by moderators.
+      - modification
+      summary: Create modification
+      description: It can be done by logged in users
+      operationId: createModification
       requestBody:
-        description: Updated article object
+        description: Created modification object
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/Article'
+              $ref: '#/components/schemas/Modification'
         required: true
-      parameters:
-      - name: articleid
-        in: path
-        description: The article that is need to be modified
-        required: true
-        schema:
-          type: string
       responses:
         200:
           description: successful operation
@@ -234,14 +228,37 @@ paths:
             application/json:
               schema:
                 type: string
-        400:
-          description: Invalid id supplied
-        404:
-          description: Article not found
       security:
         - articleService_auth:
             - admin:user
             - regular:user
+    put:
+      tags:
+      - article
+      summary: Updated article
+      description: This can only be done by the logged in user.
+      operationId: updateArticle
+      parameters:
+      - name: articleid
+        in: path
+        description: name that need to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Updated user object
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Article'
+        required: true
+      responses:
+        400:
+          description: Invalid user supplied
+          content: {}
+        404:
+          description: User not found
+          content: {}
     delete:
       tags:
       - article
@@ -273,8 +290,8 @@ paths:
         - articleService_auth:
             - admin:user
             - regular:user
-      
-      
+
+
   /article/modification:
     get:
       tags:
@@ -295,7 +312,7 @@ paths:
       security:
         - articleService_auth:
             - admin:user
-  
+
   /article/modification/{articleid}:
     get:
       tags:
@@ -322,7 +339,7 @@ paths:
       security:
         - articleService_auth:
             - admin:user
-            
+
   /article/modification/{modificationid}:
     get:
       tags:
@@ -346,34 +363,6 @@ paths:
             application/json:
               schema:
                 type: string
-      security:
-        - articleService_auth:
-            - admin:user
-    put:
-      tags:
-      - modification
-      summary: Update the article
-      description: This can only be done by the moderator.
-      operationId: updateArticle
-      parameters:
-      - name: modificationid
-        in: path
-        description: name that need to be updated
-        required: true
-        schema:
-          type: string
-      requestBody:
-        description: Updated user object
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/Modification'
-        required: true
-      responses:
-        400:
-          description: Invalid modification supplied
-        404:
-          description: Modification not found
       security:
         - articleService_auth:
             - admin:user
