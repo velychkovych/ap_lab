@@ -1,9 +1,11 @@
 from database.models import article, modification
 from database.dbUtils import *
 from database.schemas import ArticleSchema
+from database.authorization import auth
 
 
 @app.route("/article", methods=["POST"])
+@auth.login_required
 def create_article():
     return create_entry(ArticleSchema, article)
 
@@ -21,6 +23,7 @@ def get_article_by_id(id):
 @app.route("/article/<int:id>", methods=["PUT"])
 @db_lifecycle
 @session_lifecycle
+@auth.login_required
 def update_article_by_id(id):
     data = ArticleSchema().load(request.get_json())
     entry = session.query(article).get(id)
@@ -44,5 +47,6 @@ def update_article_by_id(id):
 
 
 @app.route('/article/<int:id>', methods=["DELETE"])
+@auth.login_required
 def del_article(id):
     return del_entry_by_id(ArticleSchema, article, id)

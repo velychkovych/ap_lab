@@ -4,7 +4,7 @@ import marshmallow
 import sqlalchemy
 from flask import jsonify, request
 
-from database.flask_ini import app
+from Database.flask_ini import app
 from database.models import Session
 
 session = Session()
