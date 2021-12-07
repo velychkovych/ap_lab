@@ -27,7 +27,7 @@ target_metadata = BaseModel.metadata
 # ... etc.
 config.set_main_option(
     "sqlalchemy.url",
-    "mysql+pymysql://root:pass@localhost:3306/db"
+    "mysql+pymysql://root:qwerty@localhost:3306/db"
 )
 
 def run_migrations_offline():

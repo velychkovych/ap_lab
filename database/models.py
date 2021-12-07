@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import Column, Integer, ForeignKey, VARCHAR, DateTime
 import datetime
 
-engine = create_engine('mysql+pymysql://root:pass@localhost:3306/db')
+engine = create_engine('mysql+pymysql://root:qwerty@localhost:3306/db')
 engine.connect()
 
 SessionFactory = sessionmaker(bind=engine)

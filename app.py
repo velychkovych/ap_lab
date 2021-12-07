@@ -1,4 +1,4 @@
-from database.flask_ini import app
+from Database.flask_ini import app
 
 if __name__ == '__main__':
     app.run(debug=True)
