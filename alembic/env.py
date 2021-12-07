@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from database.models import BaseModel
+from Database.models import BaseModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -27,7 +27,7 @@ target_metadata = BaseModel.metadata
 # ... etc.
 config.set_main_option(
     "sqlalchemy.url",
-    "mysql+pymysql://root:qwerty@localhost:3306/db"
+    "mysql+pymysql://root:00000000password@localhost:3306/swagger_service"
 )
 
 def run_migrations_offline():

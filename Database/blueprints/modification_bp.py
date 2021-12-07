@@ -1,7 +1,7 @@
-from database.models import modification
-from database.dbUtils import *
-from database.schemas import ModificationSchema
-from database.authorization import auth, is_admin, userStatus
+from Database.models import modification
+from Database.dbUtils import *
+from Database.schemas import ModificationSchema
+from Database.authorization import auth, is_admin, userStatus
 
 
 # set modification

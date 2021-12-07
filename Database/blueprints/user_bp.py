@@ -1,12 +1,12 @@
 import bcrypt
 
-from database.models import user
+from Database.models import user
 
-from database.dbUtils import *
+from Database.dbUtils import *
 
-from database.schemas import UserSchema
+from Database.schemas import UserSchema
 
-from database.authorization import auth, is_admin
+from Database.authorization import auth, is_admin
 
 
 @app.route('/user', methods=["POST"])
