@@ -1,9 +1,9 @@
 from flask_httpauth import HTTPBasicAuth
-from database.dbUtils import *
+from Database.dbUtils import *
 import bcrypt
 
-from database.models import user, userStatus
-from database.schemas import UserSchema
+from Database.models import user, userStatus
+from Database.schemas import UserSchema
 
 auth = HTTPBasicAuth()
 
