@@ -5,7 +5,7 @@ from Database.authorization import auth, is_admin, userStatus
 
 
 # set modification
-@app.route("/article/modification", methods=["POST"])
+@app.route("/article/modification", methods=["POST"]) # pragma: no cover
 @auth.login_required
 def create_modification():
     return create_entry(ModificationSchema, modification)
