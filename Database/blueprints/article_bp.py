@@ -1,7 +1,7 @@
-from database.models import article, modification
-from database.dbUtils import *
-from database.schemas import ArticleSchema
-from database.authorization import auth
+from Database.models import article, modification
+from Database.dbUtils import *
+from Database.schemas import ArticleSchema
+from Database.authorization import auth
 
 
 @app.route("/article", methods=["POST"])

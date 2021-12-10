@@ -3,19 +3,20 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import Column, Integer, ForeignKey, VARCHAR, DateTime
 import datetime
+from Database.flask_ini import db
 
-engine = create_engine('mysql+pymysql://root:qwerty@localhost:3306/db')
-engine.connect()
+#engine = create_engine('mysql+pymysql://root:00000000password@localhost:3306/swagger_service')
+#engine.connect()
 
-SessionFactory = sessionmaker(bind=engine)
+#SessionFactory = sessionmaker(bind=engine)
 
-Session = scoped_session(SessionFactory)
+#Session = scoped_session(SessionFactory)
 
-BaseModel = declarative_base()
-BaseModel.query = Session.query_property()
+#BaseModel = declarative_base()
+#BaseModel.query = Session.query_property()
 
 
-class userStatus(BaseModel):
+class userStatus(db.Model):
     __tablename__ = "userStatus"
 
     idUserStatus = Column(Integer, primary_key=True)
@@ -25,7 +26,7 @@ class userStatus(BaseModel):
         self.status = status
 
 
-class user(BaseModel):
+class user(db.Model):
     __tablename__ = "user"
 
     idUser = Column(Integer, primary_key=True)
@@ -43,7 +44,7 @@ class user(BaseModel):
                f"Email      : {self.email}\n"
 
 
-class article(BaseModel):
+class article(db.Model):
     __tablename__ = "article"
 
     idArticle = Column(Integer, primary_key=True)
@@ -53,7 +54,7 @@ class article(BaseModel):
     idAuthor = Column(Integer, ForeignKey(user.idUser, ondelete='CASCADE'))
 
 
-class modification(BaseModel):
+class modification(db.Model):
     __tablename__ = "modification"
 
     idModification = Column(Integer, primary_key=True)

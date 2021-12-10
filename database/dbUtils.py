@@ -1,13 +1,12 @@
 from functools import wraps
-
-import marshmallow
 import sqlalchemy
+import marshmallow
 from flask import jsonify, request
 
 from Database.flask_ini import app
-from database.models import Session
+from Database.flask_ini import db
 
-session = Session()
+session = db.session
 
 
 class InvalidUsage(Exception):
